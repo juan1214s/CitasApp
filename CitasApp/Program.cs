@@ -1,4 +1,5 @@
 using CitasApp.Context;
+using CitasApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySQL(connectionString)
 );
 
+//registro los servicios
+builder.Services.AddCustomService();
+//Registro los controladores
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

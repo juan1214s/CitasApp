@@ -63,9 +63,9 @@ namespace CitasApp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Time = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     StartTime = table.Column<TimeSpan>(type: "time(6)", nullable: false),
-                    FinalHour = table.Column<TimeSpan>(type: "time(6)", nullable: false),
+                    EndTime = table.Column<TimeSpan>(type: "time(6)", nullable: false),
                     State = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -88,18 +88,19 @@ namespace CitasApp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    SheduleId = table.Column<int>(type: "int", nullable: false),
                     ScheduleId = table.Column<int>(type: "int", nullable: false),
-                    DoctorEntityId = table.Column<int>(type: "int", nullable: true)
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentTime = table.Column<TimeSpan>(type: "time(6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookings_Doctor_DoctorEntityId",
-                        column: x => x.DoctorEntityId,
+                        name: "FK_Bookings_Doctor_DoctorId",
+                        column: x => x.DoctorId,
                         principalTable: "Doctor",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Bookings_Schedule_ScheduleId",
                         column: x => x.ScheduleId,
@@ -116,9 +117,9 @@ namespace CitasApp.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_DoctorEntityId",
+                name: "IX_Bookings_DoctorId",
                 table: "Bookings",
-                column: "DoctorEntityId");
+                column: "DoctorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bookings_ScheduleId",

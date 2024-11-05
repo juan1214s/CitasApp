@@ -25,13 +25,13 @@ namespace CitasApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DoctorEntityId")
+                    b.Property<TimeSpan>("AppointmentTime")
+                        .HasColumnType("time(6)");
+
+                    b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<int>("ScheduleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SheduleId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -39,7 +39,7 @@ namespace CitasApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorEntityId");
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("ScheduleId");
 
@@ -86,10 +86,13 @@ namespace CitasApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("FinalHour")
+                    b.Property<TimeSpan>("EndTime")
                         .HasColumnType("time(6)");
 
                     b.Property<TimeSpan>("StartTime")
@@ -97,9 +100,6 @@ namespace CitasApp.Migrations
 
                     b.Property<bool>("State")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -151,9 +151,11 @@ namespace CitasApp.Migrations
 
             modelBuilder.Entity("CitasApp.Entityes.Appointment.BookingEntity", b =>
                 {
-                    b.HasOne("CitasApp.Entityes.Doctor.DoctorEntity", null)
-                        .WithMany("bookings")
-                        .HasForeignKey("DoctorEntityId");
+                    b.HasOne("CitasApp.Entityes.Doctor.DoctorEntity", "Doctor")
+                        .WithMany("Bookings")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CitasApp.Entityes.SheduleProgramming.ScheduleProgrammingEntity", "Schedule")
                         .WithMany()
@@ -166,6 +168,8 @@ namespace CitasApp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Doctor");
 
                     b.Navigation("Schedule");
 
@@ -186,7 +190,7 @@ namespace CitasApp.Migrations
             modelBuilder.Entity("CitasApp.Entityes.SheduleProgramming.ScheduleProgrammingEntity", b =>
                 {
                     b.HasOne("CitasApp.Entityes.Doctor.DoctorEntity", "Doctor")
-                        .WithMany("scheduleProgrammings")
+                        .WithMany("ScheduleProgrammings")
                         .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -196,17 +200,16 @@ namespace CitasApp.Migrations
 
             modelBuilder.Entity("CitasApp.Entityes.Doctor.DoctorEntity", b =>
                 {
-                    b.Navigation("bookings");
+                    b.Navigation("Bookings");
 
-                    b.Navigation("scheduleProgrammings");
+                    b.Navigation("ScheduleProgrammings");
                 });
 
             modelBuilder.Entity("CitasApp.Entityes.Users.UsersEntity", b =>
                 {
                     b.Navigation("Bookings");
 
-                    b.Navigation("Doctor")
-                        .IsRequired();
+                    b.Navigation("Doctor");
                 });
 #pragma warning restore 612, 618
         }

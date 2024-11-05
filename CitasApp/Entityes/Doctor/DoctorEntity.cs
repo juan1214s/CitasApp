@@ -2,11 +2,13 @@
 using CitasApp.Entityes.SheduleProgramming;
 using CitasApp.Entityes.Users;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CitasApp.Entityes.Doctor
 {
     public class DoctorEntity
     {
+        [Key]
         public int Id { get; set; }
 
         [StringLength(80)]
@@ -20,12 +22,13 @@ namespace CitasApp.Entityes.Doctor
 
         public int UserId { get; set; }
 
-        //relacion uno a uno
+        [ForeignKey("UserId")]
         public UsersEntity User { get; set; }
 
-        //citas relacion uno a muchos
-        public ICollection<BookingEntity> bookings { get; set; }
+        // Relación uno a muchos: Un médico puede tener muchas reservas
+        public ICollection<BookingEntity> Bookings { get; set; }
 
-        public ICollection<ScheduleProgrammingEntity> scheduleProgrammings { get; set; }
+        // Relación uno a muchos: Un médico puede tener muchas programaciones de horarios
+        public ICollection<ScheduleProgrammingEntity> ScheduleProgrammings { get; set; }
     }
 }
