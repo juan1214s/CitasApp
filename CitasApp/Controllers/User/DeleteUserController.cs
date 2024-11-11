@@ -6,7 +6,7 @@ namespace CitasApp.Controllers.User
 {
     [ApiController]
     [Route("JMSCITAS/usuarios")]
-    public class DeleteUserController : Controller
+    public class DeleteUserController : ControllerBase
     {
         private readonly DeleteUserService _deleteUser;
         private readonly ILogger<DeleteUserController> _logger;

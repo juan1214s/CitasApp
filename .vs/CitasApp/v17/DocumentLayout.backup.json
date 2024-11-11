@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\juan1\\Documents\\CitasApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|c:\\users\\juan1\\documents\\citasapp\\citasapp\\dto\\userdto\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|solutionrelative:citasapp\\dto\\userdto\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|c:\\users\\juan1\\documents\\citasapp\\citasapp\\controllers\\doctor\\deletedoctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|solutionrelative:citasapp\\controllers\\doctor\\deletedoctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|c:\\users\\juan1\\documents\\citasapp\\citasapp\\services\\doctor\\deletedoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|solutionrelative:citasapp\\services\\doctor\\deletedoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|c:\\users\\juan1\\documents\\citasapp\\citasapp\\controllers\\user\\deleteusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E8A3573-3CA0-4907-941A-4C8708C2B408}|CitasApp\\CitasApp.csproj|solutionrelative:citasapp\\controllers\\user\\deleteusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,15 +30,62 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UpdateUserDto.cs",
-              "DocumentMoniker": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Dto\\UserDto\\UpdateUserDto.cs",
-              "RelativeDocumentMoniker": "CitasApp\\Dto\\UserDto\\UpdateUserDto.cs",
-              "ToolTip": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Dto\\UserDto\\UpdateUserDto.cs",
-              "RelativeToolTip": "CitasApp\\Dto\\UserDto\\UpdateUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAhAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "DeleteDoctorService.cs",
+              "DocumentMoniker": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Services\\Doctor\\DeleteDoctorService.cs",
+              "RelativeDocumentMoniker": "CitasApp\\Services\\Doctor\\DeleteDoctorService.cs",
+              "ToolTip": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Services\\Doctor\\DeleteDoctorService.cs",
+              "RelativeToolTip": "CitasApp\\Services\\Doctor\\DeleteDoctorService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAwC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-05T00:53:37.404Z",
+              "WhenOpened": "2024-11-11T01:12:26.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DeleteDoctorController.cs",
+              "DocumentMoniker": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Controllers\\Doctor\\DeleteDoctorController.cs",
+              "RelativeDocumentMoniker": "CitasApp\\Controllers\\Doctor\\DeleteDoctorController.cs",
+              "ToolTip": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Controllers\\Doctor\\DeleteDoctorController.cs*",
+              "RelativeToolTip": "CitasApp\\Controllers\\Doctor\\DeleteDoctorController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T00:56:31.877Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "35542113-46b0-49de-ba0a-608680ee98a1",
+        "Display": 0,
+        "X": 0,
+        "Y": 0,
+        "Width": 1280,
+        "Height": 1032,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DeleteUserController.cs",
+              "DocumentMoniker": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Controllers\\User\\DeleteUserController.cs",
+              "RelativeDocumentMoniker": "CitasApp\\Controllers\\User\\DeleteUserController.cs",
+              "ToolTip": "C:\\Users\\juan1\\Documents\\CitasApp\\CitasApp\\Controllers\\User\\DeleteUserController.cs*",
+              "RelativeToolTip": "CitasApp\\Controllers\\User\\DeleteUserController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T01:04:30.166Z",
               "EditorCaption": ""
             }
           ]

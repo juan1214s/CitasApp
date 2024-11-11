@@ -39,6 +39,7 @@ namespace CitasApp.Services.User
                     throw new ArgumentException("El usuario no existe.");
                 }
 
+                //utilizo mapper para copiar las propiedades de un usuario si le no le paso nada en el body
                 _mapper.Map(userDto, existingUser);
 
                 await _context.SaveChangesAsync();
