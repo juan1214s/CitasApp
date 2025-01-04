@@ -1,5 +1,5 @@
 ﻿using CitasApp.Entityes.Appointment;
-using CitasApp.Entityes.SheduleProgramming;
+using CitasApp.Entityes.Location;
 using CitasApp.Entityes.Users;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,24 +11,31 @@ namespace CitasApp.Entityes.Doctor
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [StringLength(80)]
-        public string Specialty { get; set; }
+        public required string Specialty { get; set; }
 
+        [Required]
         [StringLength(100)]
-        public string LicenseNumber { get; set; }
+        public required string LicenseNumber { get; set; }    
 
         [StringLength(8)]
-        public string Office { get; set; }
+        public required string Office { get; set; }
 
+        // Relación muchos a uno: Un médico pertenece a una sola sede
+        [Required]
+        public int LocationId { get; set; }
+
+        [Required]
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
         public UsersEntity User { get; set; }
 
         // Relación uno a muchos: Un médico puede tener muchas reservas
-        public ICollection<BookingEntity> Bookings { get; set; }
+        public ICollection<AppointmentsAvailable> Appointments { get; set; }
 
-        // Relación uno a muchos: Un médico puede tener muchas programaciones de horarios
-        public ICollection<ScheduleProgrammingEntity> ScheduleProgrammings { get; set; }
+        [ForeignKey("LocationId")]
+        public LocationEntity Location { get; set; }
     }
 }

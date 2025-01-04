@@ -19,7 +19,7 @@ namespace CitasApp.Controllers.Doctor
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDoctor([FromBody] CreateDoctorDto doctorDto)
+        public async Task<IActionResult> CreateDoctor([FromBody] PostDoctorDto doctorDto)
         {
             if (doctorDto == null)
             {

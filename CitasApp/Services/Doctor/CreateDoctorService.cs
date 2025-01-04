@@ -24,7 +24,7 @@ namespace CitasApp.Services.Doctor
             _getUserByIdService = getUserByIdService;
         }
 
-        public async Task<bool> CreateDoctor(CreateDoctorDto doctorDto)
+        public async Task<bool> CreateDoctor(PostDoctorDto doctorDto)
         {
             try
             {
@@ -52,7 +52,8 @@ namespace CitasApp.Services.Doctor
                     Specialty = doctorDto.Specialty,
                     LicenseNumber = doctorDto.LicenseNumber,
                     Office = doctorDto.Office,
-                    UserId = doctorDto.UserId
+                    UserId = doctorDto.UserId,
+                    LocationId = doctorDto.LocationId
                 };
 
                 _context.Add(doctor);
