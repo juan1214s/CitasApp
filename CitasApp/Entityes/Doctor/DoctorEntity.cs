@@ -1,4 +1,5 @@
 ﻿using CitasApp.Entityes.Appointment;
+using CitasApp.Entityes.Appointment.CitasApp.Entityes.Appointment;
 using CitasApp.Entityes.Location;
 using CitasApp.Entityes.Users;
 using System.ComponentModel.DataAnnotations;
@@ -33,7 +34,7 @@ namespace CitasApp.Entityes.Doctor
         public UsersEntity User { get; set; }
 
         // Relación uno a muchos: Un médico puede tener muchas reservas
-        public ICollection<AppointmentsAvailable> Appointments { get; set; }
+        public ICollection<AppointmentsAvailableEntity> Appointments { get; set; }
 
         [ForeignKey("LocationId")]
         public LocationEntity Location { get; set; }

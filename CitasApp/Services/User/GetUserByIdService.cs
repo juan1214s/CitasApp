@@ -40,9 +40,9 @@ namespace CitasApp.Services.User
                     Name = user.Name,
                     LastName = user.LastName,
                     Email = user.Email,
-                    Password = user.Password,
                     Phone = user.Phone,
-                    Role = user.Role
+                    Role = user.Role,
+                    BirthDate = user.BirthDate
                 };
             }
             catch (Exception ex)

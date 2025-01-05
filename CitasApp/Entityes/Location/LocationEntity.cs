@@ -6,11 +6,12 @@ using CitasApp.Entityes.Doctor;
 
 namespace CitasApp.Entityes.Location
 {
+
     public class LocationEntity
     {
         [Key]
         public int Id { get; set; }
-
+        
         [StringLength(80)]
         public required string Location { get; set; }
 

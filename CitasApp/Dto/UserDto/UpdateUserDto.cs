@@ -4,6 +4,7 @@ namespace CitasApp.Dto.UserDto
 {
     public class UpdateUserDto
     {
+
         [StringLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres.")]
         public string? Name { get; set; }
 
@@ -13,11 +14,9 @@ namespace CitasApp.Dto.UserDto
         [EmailAddress(ErrorMessage = "Debe proporcionar una dirección de correo válida.")]
         public  string? Email { get; set; }
 
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "La contraseña debe tener entre 8 y 100 caracteres.")]
-        public  string? Password { get; set; }
-
-        //[Phone(ErrorMessage = "Debe proporcionar un número de teléfono válido.")]
-        //[StringLength(11, ErrorMessage = "El teléfono no puede tener más de 11 caracteres.")]
+        //Impone un formato especifico
+        [Required, StringLength(15)]
+        [RegularExpression(@"^\+?[0-9]*$", ErrorMessage = "El teléfono debe contener solo números y un signo '+' opcional.")]
         public string? Phone { get; set; }
 
         [RegularExpression("Doctor|Paciente", ErrorMessage = "El rol debe ser 'Doctor' o 'Paciente'.")]

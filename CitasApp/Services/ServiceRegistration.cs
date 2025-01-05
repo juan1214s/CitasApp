@@ -1,5 +1,4 @@
 ﻿using CitasApp.Services.AutoMapper;
-using CitasApp.Services.Bcrypt;
 using CitasApp.Services.Doctor;
 using CitasApp.Services.User;
 
@@ -18,9 +17,6 @@ namespace CitasApp.Services
             services.AddScoped<DeleteUserService>();
             services.AddScoped<GetUserByIdService>();
             services.AddScoped<UpdateUserService>();
-
-            //Bcrypt
-            services.AddScoped<BcryptService>();
 
             //Doctor
             services.AddScoped<CreateDoctorService>();

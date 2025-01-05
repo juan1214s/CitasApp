@@ -1,7 +1,6 @@
 ﻿using CitasApp.Context;
 using CitasApp.Dto.UserDto;
 using CitasApp.Entityes.Users;
-using CitasApp.Services.Bcrypt;
 
 namespace CitasApp.Services.User
 {
@@ -9,17 +8,14 @@ namespace CitasApp.Services.User
     {
         private readonly ILogger<CreateUserService> _logger;
         private readonly AppDbContext _context;
-        private readonly BcryptService _bcryptService;
 
         public CreateUserService(
             AppDbContext context, 
-            ILogger<CreateUserService> logger, 
-            BcryptService bcryptService
+            ILogger<CreateUserService> logger
             )
         {
             _context = context;
             _logger = logger;
-            _bcryptService = bcryptService;
         }
 
         public async Task<bool> CreateUser(CreateUserDto userDto)
@@ -27,16 +23,15 @@ namespace CitasApp.Services.User
             try
             {
 
-                string hashedPassword = _bcryptService.HashPasswork(userDto.Password);
-
                 var user = new UsersEntity
                 {
+                    Id = userDto.Id,
                     Name = userDto.Name,
                     LastName = userDto.LastName,
                     Email = userDto.Email,
-                    Password = hashedPassword,
                     Phone = userDto.Phone,
-                    Role = userDto.Role
+                    Role = userDto.Role,
+                    BirthDate = userDto.BirthDate.Date // Solo la parte de la fecha
                 };
 
                 _context.Add(user);

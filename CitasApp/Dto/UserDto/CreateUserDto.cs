@@ -4,9 +4,17 @@ namespace CitasApp.Dto.UserDto
 {
     public class CreateUserDto
     {
+        [Required(ErrorMessage = "La cédula o identificación es obligatoria.")]
+        [Range(10000, int.MaxValue, ErrorMessage = "La identificación debe tener al menos 5 dígitos.")]
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         [StringLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres.")]
         public required string Name { get; set; }
+
+        [Required(ErrorMessage = "La fecha de nacimiento es requerida para continuar.")]
+        [DataType(DataType.Date, ErrorMessage = "Formato de fecha inválido.")]
+        public DateTime BirthDate { get; set; }
 
         [Required(ErrorMessage = "El apellido es obligatorio.")]
         [StringLength(100, ErrorMessage = "El apellido no puede tener más de 100 caracteres.")]
@@ -16,9 +24,7 @@ namespace CitasApp.Dto.UserDto
         [EmailAddress(ErrorMessage = "Debe proporcionar una dirección de correo válida.")]
         public required string Email { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es obligatoria.")]
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "La contraseña debe tener entre 8 y 100 caracteres.")]
-        public required string Password { get; set; }
+
 
         [Required(ErrorMessage = "El teléfono es obligatorio.")]
         [Phone(ErrorMessage = "Debe proporcionar un número de teléfono válido.")]
