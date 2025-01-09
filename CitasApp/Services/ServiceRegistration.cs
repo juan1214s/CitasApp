@@ -1,5 +1,6 @@
 ﻿using CitasApp.Services.AutoMapper;
 using CitasApp.Services.Doctor;
+using CitasApp.Services.Exceptions;
 using CitasApp.Services.User;
 
 namespace CitasApp.Services

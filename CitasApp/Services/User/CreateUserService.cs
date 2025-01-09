@@ -1,6 +1,8 @@
 ﻿using CitasApp.Context;
 using CitasApp.Dto.UserDto;
 using CitasApp.Entityes.Users;
+using CitasApp.Services.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace CitasApp.Services.User
 {
@@ -17,21 +19,26 @@ namespace CitasApp.Services.User
             _context = context;
             _logger = logger;
         }
-
         public async Task<bool> CreateUser(CreateUserDto userDto)
         {
             try
             {
+                var existingUser = await _context.User.FirstOrDefaultAsync(u => u.Id == userDto.Id);
+
+                if (existingUser != null)
+                {
+                    // Lanza la excepción personalizada cuando el usuario ya existe
+                    throw new Exceptions.UserAlreadyExistsException($"El usuario con ID {userDto.Id} ya está registrado.");
+                }
 
                 var user = new UsersEntity
                 {
-                    Id = userDto.Id,
                     Name = userDto.Name,
                     LastName = userDto.LastName,
                     Email = userDto.Email,
                     Phone = userDto.Phone,
                     Role = userDto.Role,
-                    BirthDate = userDto.BirthDate.Date // Solo la parte de la fecha
+                    BirthDate = userDto.BirthDate.Date
                 };
 
                 _context.Add(user);
@@ -39,11 +46,16 @@ namespace CitasApp.Services.User
 
                 return true;
             }
+            catch (Exceptions.UserAlreadyExistsException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
-                _logger.LogInformation($"Error interno al crear el usuario: {ex.ToString()}");
-                return false;
+                _logger.LogError($"Error interno al crear el usuario: {ex.Message}");
+                throw new AppExceptions("Ocurrió un error al intentar crear el usuario."); // Lanza una excepción genérica si hay otro error
             }
         }
+
     }
 }

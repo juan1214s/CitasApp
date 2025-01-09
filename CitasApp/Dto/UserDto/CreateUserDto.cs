@@ -24,8 +24,6 @@ namespace CitasApp.Dto.UserDto
         [EmailAddress(ErrorMessage = "Debe proporcionar una dirección de correo válida.")]
         public required string Email { get; set; }
 
-
-
         [Required(ErrorMessage = "El teléfono es obligatorio.")]
         [Phone(ErrorMessage = "Debe proporcionar un número de teléfono válido.")]
         [StringLength(15, ErrorMessage = "El teléfono no puede tener más de 15 caracteres.")]
