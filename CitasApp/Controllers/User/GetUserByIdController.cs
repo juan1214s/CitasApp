@@ -1,4 +1,5 @@
 ﻿using CitasApp.Dto.UserDto;
+using CitasApp.Services.Exceptions;
 using CitasApp.Services.User;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -24,14 +25,12 @@ namespace CitasApp.Controllers.User
             try
             {
                 var userDto = await _userService.GetUserById(id);
-
-                if (userDto == null)
-                {
-                    _logger.LogInformation("Usuario no encontrado.");
-                    return NotFound(new {error = "Usuario no encontrado."});
-                }
-
                 return Ok(userDto);
+            }
+            catch ( ResourceNotFoundException ex)
+            {
+                _logger.LogWarning("No se encontro ningun usuario con el ID proporcionado.");
+                return NotFound(new { message = "No se encontro el usuario." });
             }
             catch (ArgumentException ex)
             {

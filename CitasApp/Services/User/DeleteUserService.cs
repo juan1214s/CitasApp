@@ -1,4 +1,5 @@
 ﻿using CitasApp.Context;
+using CitasApp.Services.Exceptions;
 
 namespace CitasApp.Services.User
 {
@@ -17,7 +18,8 @@ namespace CitasApp.Services.User
         {
             if (id < 0)
             {
-                return false;
+                _logger.LogError($"Intento eliminar con un ID invalido: {id} ");
+                throw new ArgumentException("El ID del usuario debe de ser valido.");
             }
 
             try
@@ -26,18 +28,28 @@ namespace CitasApp.Services.User
 
                 if (deleteUser == null)
                 {
-                    return false;
+                    _logger.LogWarning($"Usuario no encontrado con el ID: {id}");
+                    throw new ResourceNotFoundException("Usuario no encontrado.");
                 }
 
                 _context.User.Remove(deleteUser);
                 await _context.SaveChangesAsync();
+
+                _logger.LogInformation($"Usuario con ID {id} eliminado exitosamente.");
+
                 return true;
 
             }
+            catch (ResourceNotFoundException ex)
+            {
+                // Manejo de la excepción de recurso no encontrado
+                _logger.LogWarning($"Error: {ex.Message}");
+                throw; // Dejar que el controlador maneje esta excepción
+            }
             catch (Exception ex)
             {
-                _logger.LogInformation($"Error al intentar eliminar el usuario: {ex.ToString()}");
-                return false;
+                _logger.LogError($"Error interno al intentar eliminar el usuario con ID {id}: {ex}");
+                throw new Exception("Error interno al intentar eliminar el usuario.");
             }
         }
     }

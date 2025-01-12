@@ -1,6 +1,7 @@
 ﻿using CitasApp.Context;
 using CitasApp.Dto.UserDto;
 using CitasApp.Entityes.Users;
+using CitasApp.Services.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace CitasApp.Services.User
@@ -31,7 +32,7 @@ namespace CitasApp.Services.User
                 if (user == null)
                 {
                     _logger.LogInformation("No se encontró un usuario con ID: {Id}", id);
-                    return null; 
+                    throw new ResourceNotFoundException("El usuario que buscas no se encontro.");
                 }
 
                 return new UserDto
@@ -45,10 +46,15 @@ namespace CitasApp.Services.User
                     BirthDate = user.BirthDate
                 };
             }
+            catch (ResourceNotFoundException ex)
+            {
+                _logger.LogWarning($"Error: {ex.Message}");
+                throw;
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al intentar obtener el usuario con ID: {Id}", id);
-                throw; 
+                throw new Exception("Error interno al intentas obtener el usuario por su ID.");
             }
         }
     }

@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
 
-        public required string Specialty { get; set; }
+        public string Specialty { get; set; }
 
-        public required string LicenseNumber { get; set; }
+        public string LicenseNumber { get; set; }
 
         public required string Office { get; set; }
 

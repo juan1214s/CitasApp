@@ -1,5 +1,6 @@
 ﻿using CitasApp.Dto.Doctor;
 using CitasApp.Services.Doctor;
+using CitasApp.Services.Exceptions;  // Asegúrate de incluir las excepciones personalizadas
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -34,7 +35,7 @@ namespace CitasApp.Controllers.Doctor
                 if (result)
                 {
                     _logger.LogInformation("Se creó correctamente el perfil del médico.");
-                    return Ok(new { message = "Se creó correctamente el perfil del médico." });
+                    return StatusCode(201, new { message = "Se creó correctamente el perfil del médico." });
                 }
                 else
                 {
@@ -42,15 +43,33 @@ namespace CitasApp.Controllers.Doctor
                     return BadRequest(new { message = "Ocurrió un error al intentar crear el perfil del médico." });
                 }
             }
-            catch (InvalidOperationException ex)
+            catch (LicenseNumberAlreadyExistsException ex)
             {
-                // Excepción personalizada, por ejemplo: si el número de licencia ya existe
+                // Captura la excepción personalizada para el número de licencia duplicado
                 _logger.LogWarning($"Error de validación: {ex.Message}");
-                return BadRequest(new { message = $"Ya hay un medico registrado con ese numero de licencia: {ex.ToString()}"});
+                return BadRequest(new { message = $"Ya hay un médico registrado con ese número de licencia: {ex.Message}" });
+            }
+            catch (UserNotDoctorException ex)
+            {
+                // Captura la excepción personalizada para el caso en que el usuario no tiene el rol de doctor
+                _logger.LogWarning($"Error de validación: {ex.Message}");
+                return BadRequest(new { message = $"El usuario no tiene el rol de doctor: {ex.Message}" });
+            }
+            catch (EntityNotFoundException ex)
+            {
+                // Captura la excepción personalizada para el caso en que no se encuentra el usuario
+                _logger.LogWarning($"Error de validación: {ex.Message}");
+                return NotFound(new { message = ex.Message });
+            }
+            catch (AppExceptions ex)
+            {
+                // Captura excepciones generales personalizadas (como AppExceptions)
+                _logger.LogError($"Excepción personalizada: {ex.Message}");
+                return StatusCode(ex.StatusCode, new { message = ex.Message });
             }
             catch (Exception ex)
             {
-                // Excepción general para otros errores
+                // Excepción general para otros errores no capturados
                 _logger.LogError($"Error interno al intentar crear el perfil del médico: {ex}");
                 return StatusCode(500, new { error = "Error interno al intentar crear el perfil del médico." });
             }

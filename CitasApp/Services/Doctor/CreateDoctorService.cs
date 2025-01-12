@@ -4,6 +4,7 @@ using CitasApp.Entityes.Doctor;
 using CitasApp.Services.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
+using CitasApp.Services.Exceptions;
 
 namespace CitasApp.Services.Doctor
 {
@@ -33,17 +34,23 @@ namespace CitasApp.Services.Doctor
                 if (userIsDoctor.Role != "Doctor")
                 {
                     _logger.LogError("El usuario no tiene el rol de Doctor.");
-                    return false;
+                    throw new UserNotDoctorException("El usuario proporcionado no tiene el rol de Doctor.");
+                }
+
+                // Verificar si el usuario existe
+                var existUserId = await _context.User.FirstOrDefaultAsync(u => u.Id == doctorDto.UserId);
+                if (existUserId == null)
+                {
+                    _logger.LogError("El usuario no existe.");
+                    throw new EntityNotFoundException("El usuario no existe, ingresa uno válido.");
                 }
 
                 // Verificar si el número de licencia ya existe
-                var existingDoctor = await _context.Doctor
-                    .FirstOrDefaultAsync(d => d.LicenseNumber == doctorDto.LicenseNumber);
-
+                var existingDoctor = await _context.Doctor.FirstOrDefaultAsync(d => d.LicenseNumber == doctorDto.LicenseNumber);
                 if (existingDoctor != null)
                 {
                     _logger.LogError("El número de licencia ya existe para otro doctor.");
-                    throw new InvalidOperationException("El número de licencia ya está en uso por otro doctor.");
+                    throw new LicenseNumberAlreadyExistsException("El número de licencia ya está en uso por otro doctor.");
                 }
 
                 // Crear el nuevo perfil de doctor
@@ -60,13 +67,12 @@ namespace CitasApp.Services.Doctor
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("Se creó correctamente el perfil del doctor.");
-
                 return true;
             }
-            catch (InvalidOperationException ex)
+            catch (AppExceptions ex)
             {
-                _logger.LogWarning($"Excepción: {ex.Message}");
-                throw;  // Permite que la excepción sea manejada por el controlador o capa superior
+                _logger.LogWarning($"Excepción personalizada: {ex.Message}");
+                throw;  // Deja que la excepción personalizada sea manejada por el controlador
             }
             catch (Exception ex)
             {
@@ -74,6 +80,7 @@ namespace CitasApp.Services.Doctor
                 throw new Exception("Ocurrió un error al crear el perfil del doctor.");
             }
         }
+
 
 
     }

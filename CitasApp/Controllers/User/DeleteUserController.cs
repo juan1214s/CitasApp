@@ -1,4 +1,5 @@
-﻿using CitasApp.Services.User;
+﻿using CitasApp.Services.Exceptions;
+using CitasApp.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -20,23 +21,20 @@ namespace CitasApp.Controllers.User
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            if (id <= 0)
-            {
-                return BadRequest(new { error = "Debes ingresar un ID válido." });
-            }
-
             try
             {
                 var result = await _deleteUser.DeleteUser(id);
-
-                if (!result)
-                {
-                    return NotFound(new { error = "Usuario no encontrado." });
-                }
-                else
-                {
-                    return Ok(new { mensaje = "Se eliminó correctamente el usuario." });
-                }
+                return Ok(new { message = "Usuario eliminado exitosamente." });
+            }
+            catch (ResourceNotFoundException ex)
+            {
+                _logger.LogWarning($"No se encontró el usuario: {ex.Message}");
+                return NotFound(new { message = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogWarning($"Error en la validación: {ex.Message}");
+                return BadRequest(new { message = ex.Message });
             }
             catch (Exception ex)
             {

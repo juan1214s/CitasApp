@@ -1,4 +1,5 @@
 ﻿using CitasApp.Context;
+using CitasApp.Services.Exceptions;
 
 namespace CitasApp.Services.Doctor
 {
@@ -13,12 +14,12 @@ namespace CitasApp.Services.Doctor
             _logger = logger;
         }
 
-        public async Task<bool> DeleDoctor(int id)
+        public async Task<bool> DeleteDoctor(int id)
         {
             if (id < 0)
             {
-                _logger.LogError("El parametro que se intenta pasar al eliminar el medico no es valido.");
-                return false;
+                _logger.LogError($"Se esta intentado eliminar un Doctor sin un ID valido: {id}");
+                throw new ArgumentException("El ID del usuario debe de ser valido.");
             }
 
             try
@@ -28,12 +29,20 @@ namespace CitasApp.Services.Doctor
                 if (deleteDoctor == null)
                 {
                     _logger.LogError("El medico que intentas eliminar no existe.");
-                    throw new InvalidOperationException("El medico que intentas eliminar no existe.");
+                    throw new ResourceNotFoundException("No se encontro el medico.");
                 }
 
                 _context.Doctor.Remove(deleteDoctor);
                 await _context.SaveChangesAsync();
+
+                _logger.LogInformation("Se elimino correctamente el Doctor.");
+
                 return true;
+            }
+            catch (ResourceNotFoundException ex)
+            {
+                _logger.LogWarning($"Error: {ex.Message}");
+                throw;
             }
             catch (Exception ex)
             {

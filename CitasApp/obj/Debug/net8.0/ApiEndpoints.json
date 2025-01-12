@@ -16,6 +16,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CitasApp.Controllers.Doctor.GetDoctorByIdController",
+    "Method": "GetDoctor",
+    "RelativePath": "JMSCITAS/doctor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CitasApp.Controllers.Doctor.UpdateDoctorController",
     "Method": "UpdateDoctor",
     "RelativePath": "JMSCITAS/doctor/{id}",

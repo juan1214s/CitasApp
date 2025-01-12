@@ -23,6 +23,7 @@ namespace CitasApp.Services
             services.AddScoped<CreateDoctorService>();
             services.AddScoped<DeleteDoctorService>();
             services.AddScoped<UpdateDoctorService>();
+            services.AddScoped<GetDoctorByIdService>();
         }
     }
 }

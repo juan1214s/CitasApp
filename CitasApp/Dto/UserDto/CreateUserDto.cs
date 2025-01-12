@@ -12,13 +12,13 @@ namespace CitasApp.Dto.UserDto
         [StringLength(100, ErrorMessage = "El nombre no puede tener más de 100 caracteres.")]
         public required string Name { get; set; }
 
-        [Required(ErrorMessage = "La fecha de nacimiento es requerida para continuar.")]
-        [DataType(DataType.Date, ErrorMessage = "Formato de fecha inválido.")]
-        public DateTime BirthDate { get; set; }
-
         [Required(ErrorMessage = "El apellido es obligatorio.")]
         [StringLength(100, ErrorMessage = "El apellido no puede tener más de 100 caracteres.")]
         public required string LastName { get; set; }
+
+        [Required(ErrorMessage = "La fecha de nacimiento es requerida para continuar.")]
+        [DataType(DataType.Date, ErrorMessage = "Formato de fecha inválido.")]
+        public DateTime BirthDate { get; set; }
 
         [Required(ErrorMessage = "El email es obligatorio.")]
         [EmailAddress(ErrorMessage = "Debe proporcionar una dirección de correo válida.")]

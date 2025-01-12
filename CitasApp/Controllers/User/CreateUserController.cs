@@ -33,7 +33,7 @@ public class CreateUserController : ControllerBase
             if (result)
             {
                 _logger.LogInformation("Usuario creado con éxito.");
-                return Ok(new { message = "Se creó con éxito el usuario." });
+                return StatusCode(201, new { message = "Se creó con éxito el usuario." });
             }
             else
             {
@@ -45,6 +45,11 @@ public class CreateUserController : ControllerBase
         {
             // Deja que el middleware maneje las excepciones personalizadas
             return Conflict(new { message = ex.Message });
+        }
+        catch (AppExceptions ex)
+        {
+            _logger.LogError(ex.Message); // Registra el mensaje de la excepción personalizada.
+            return StatusCode(ex.StatusCode, new { error = ex.Message });
         }
         catch (Exception ex)
         {
