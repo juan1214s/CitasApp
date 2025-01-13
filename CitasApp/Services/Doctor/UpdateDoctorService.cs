@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CitasApp.Context;
 using CitasApp.Dto.Doctor;
+using CitasApp.Services.Exceptions;
 
 namespace CitasApp.Services.Doctor
 {
@@ -19,11 +20,13 @@ namespace CitasApp.Services.Doctor
 
         public async Task<bool> UpdateDoctor(int id, UpdateDoctorDto doctorDto)
         {
-            if (doctorDto == null)
+
+            if (doctorDto == null) 
             {
                 _logger.LogWarning("Los datos del doctor no pueden estar vacios.");
                 throw new ArgumentNullException(nameof(doctorDto), "Los datos del doctor no pueden estar vacios.");
             }
+
 
             try
             {
@@ -32,7 +35,7 @@ namespace CitasApp.Services.Doctor
                 if (existingDoctor == null)
                 {
                     _logger.LogInformation("El perfil del medico que intentas actualizar no existe.");
-                    throw new ArgumentException("El perfil del medico que intentas actualizar no existe.");
+                    throw new ResourceNotFoundException("El perfil del medico que intentas actualizar no existe.");
                 }
 
                 _mapper.Map(doctorDto, existingDoctor);

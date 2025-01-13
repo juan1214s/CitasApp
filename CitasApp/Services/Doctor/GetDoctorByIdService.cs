@@ -27,17 +27,21 @@ namespace CitasApp.Services.Doctor
             try
             {
                 // Cargar el doctor junto con las relaciones de Location y User
+                //var doctor = await _context.Doctor.FindAsync(id);
                 var doctor = await _context.Doctor
-                    .Include(d => d.LocationId)  // Incluye la relación con Location
-                    .Include(d => d.UserId)      // Incluye la relación con User
-                    .FirstOrDefaultAsync(d => d.Id == id); // Obtiene el doctor por su ID
+                .Include(d => d.Location) // Incluye la relación con Location
+                .Include(d => d.User)     // Incluye la relación con User
+                .FirstAsync(d => d.Id == id);
+
 
                 if (doctor == null)
                 {
+
                     _logger.LogInformation($"El doctor que buscas no se encontró: {id}");
                     throw new ResourceNotFoundException("El doctor que buscas no se encontró.");
                 }
 
+                _logger.LogInformation($"Doctor encontrado: Sede: {doctor.Location?.Location}, Usuario: {doctor.User?.Name}");
                 // Mapea el Doctor a un DTO
                 return new GetDoctorDto
                 {
@@ -46,7 +50,14 @@ namespace CitasApp.Services.Doctor
                     LicenseNumber = doctor.LicenseNumber,
                     Office = doctor.Office,
                     LocationId = doctor.LocationId,
-                    UserId = doctor.UserId
+                    Location = doctor.Location.Location,
+                    UserId = doctor.UserId,
+                    Name = doctor.User.Name,
+                    LastName = doctor.User.LastName,
+                    BirthDate = doctor.User.BirthDate,
+                    Email = doctor.User.Email,
+                    Phone = doctor.User.Phone,
+                    Role = doctor.User.Role
                 };
             }
             catch (ResourceNotFoundException ex)

@@ -28,7 +28,7 @@ namespace CitasApp.Controllers.Doctor
             catch(ResourceNotFoundException ex)
             {
                 _logger.LogWarning("No se encontro ningun doctor con el ID proporcionado.");
-                return NotFound(new { message = "No se encontro el doctor." });
+                return NotFound(new { error = "No se encontro el doctor." });
             }
             catch(ArgumentException ex)
             {
