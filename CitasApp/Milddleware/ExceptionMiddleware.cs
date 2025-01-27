@@ -1,4 +1,4 @@
-﻿using CitasApp.Services.Exceptions;
+﻿using CitasApp.Exceptions;
 using System.Net;
 using System.Text.Json;
 

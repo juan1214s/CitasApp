@@ -1,6 +1,6 @@
 ﻿using CitasApp.Dto.Doctor;
+using CitasApp.Exceptions;
 using CitasApp.Services.Doctor;
-using CitasApp.Services.Exceptions;  // Asegúrate de incluir las excepciones personalizadas
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -43,19 +43,19 @@ namespace CitasApp.Controllers.Doctor
                     return BadRequest(new { message = "Ocurrió un error al intentar crear el perfil del médico." });
                 }
             }
-            catch (LicenseNumberAlreadyExistsException ex)
+            catch (ResourceAlreadyExistsException ex)
             {
                 // Captura la excepción personalizada para el número de licencia duplicado
                 _logger.LogWarning($"Error de validación: {ex.Message}");
                 return BadRequest(new { message = $"Ya hay un médico registrado con ese número de licencia: {ex.Message}" });
             }
-            catch (UserNotDoctorException ex)
+            catch (AccessNotReSource ex)
             {
                 // Captura la excepción personalizada para el caso en que el usuario no tiene el rol de doctor
                 _logger.LogWarning($"Error de validación: {ex.Message}");
                 return BadRequest(new { message = $"El usuario no tiene el rol de doctor: {ex.Message}" });
             }
-            catch (EntityNotFoundException ex)
+            catch (ResourceNotFoundException ex)
             {
                 // Captura la excepción personalizada para el caso en que no se encuentra el usuario
                 _logger.LogWarning($"Error de validación: {ex.Message}");

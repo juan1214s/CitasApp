@@ -1,8 +1,8 @@
 ﻿using CitasApp.Dto.UserDto;
 using CitasApp.Services.User;
-using CitasApp.Services.Exceptions;  // Agregar esta línea
 using Microsoft.AspNetCore.Mvc;
 using System;
+using CitasApp.Exceptions;
 
 [ApiController]
 [Route("JMSCITAS/usuarios")]
@@ -41,7 +41,7 @@ public class CreateUserController : ControllerBase
                 return BadRequest(new { error = "Error al crear el usuario." });
             }
         }
-        catch (UserAlreadyExistsException ex)  // Ajusta la excepción aquí
+        catch (ResourceAlreadyExistsException ex) 
         {
             // Deja que el middleware maneje las excepciones personalizadas
             return Conflict(new { message = ex.Message });

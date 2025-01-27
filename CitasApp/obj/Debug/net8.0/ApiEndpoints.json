@@ -53,6 +53,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "CitasApp.Controllers.Location.CreateLocationController",
+    "Method": "CreateLocation",
+    "RelativePath": "JMSCITAS/location",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createLocationDto",
+        "Type": "CitasApp.Dto.LocationDto.CreateLocationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CitasApp.Controllers.Location.GetLocationsController",
+    "Method": "GetLocations",
+    "RelativePath": "JMSCITAS/location",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CitasApp.Controllers.Location.DeleteLocationController",
+    "Method": "DeleteLocation",
+    "RelativePath": "JMSCITAS/location/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "CitasApp.Controllers.Doctor.DeleteDoctorController",
     "Method": "DeleteDoctor",
     "RelativePath": "JMSCITAS/medico/{id}",

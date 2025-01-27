@@ -45,7 +45,7 @@ namespace CitasApp.Controllers.User
             catch (ArgumentException ex)
             {
                 _logger.LogWarning("Error al actualizar el usuario con ID: {Id} - {ErrorMessage}", id, ex.Message);
-                return BadRequest(new { error = ex.Message }); 
+                return BadRequest(new { error = ex.Message });
             }
             catch (Exception ex)
             {

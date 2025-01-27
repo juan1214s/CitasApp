@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CitasApp.Context;
 using CitasApp.Dto.Doctor;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 
 namespace CitasApp.Services.Doctor
 {

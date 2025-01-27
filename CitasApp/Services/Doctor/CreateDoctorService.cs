@@ -4,7 +4,7 @@ using CitasApp.Entityes.Doctor;
 using CitasApp.Services.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.HttpResults;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 
 namespace CitasApp.Services.Doctor
 {
@@ -34,7 +34,7 @@ namespace CitasApp.Services.Doctor
                 if (userIsDoctor.Role != "Doctor")
                 {
                     _logger.LogError("El usuario no tiene el rol de Doctor.");
-                    throw new UserNotDoctorException("El usuario proporcionado no tiene el rol de Doctor.");
+                    throw new AccessNotReSource("El usuario proporcionado no tiene el rol de Doctor.");
                 }
 
                 // Verificar si el usuario existe
@@ -42,7 +42,7 @@ namespace CitasApp.Services.Doctor
                 if (existUserId == null)
                 {
                     _logger.LogError("El usuario no existe.");
-                    throw new EntityNotFoundException("El usuario no existe, ingresa uno válido.");
+                    throw new ResourceNotFoundException("El usuario no existe, ingresa uno válido.");
                 }
 
                 // Verificar si el número de licencia ya existe
@@ -50,7 +50,7 @@ namespace CitasApp.Services.Doctor
                 if (existingDoctor != null)
                 {
                     _logger.LogError("El número de licencia ya existe para otro doctor.");
-                    throw new LicenseNumberAlreadyExistsException("El número de licencia ya está en uso por otro doctor.");
+                    throw new ResourceAlreadyExistsException("El número de licencia ya está en uso por otro doctor.");
                 }
 
                 // Crear el nuevo perfil de doctor

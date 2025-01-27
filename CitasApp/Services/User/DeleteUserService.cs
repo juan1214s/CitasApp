@@ -1,5 +1,5 @@
 ﻿using CitasApp.Context;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 
 namespace CitasApp.Services.User
 {

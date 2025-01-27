@@ -1,12 +1,12 @@
 ﻿using CitasApp.Context;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 
 namespace CitasApp.Services.Doctor
 {
     public class DeleteDoctorService
     {
-        public readonly AppDbContext _context;
-        public readonly ILogger<DeleteDoctorService> _logger;
+        private readonly AppDbContext _context;
+        private readonly ILogger<DeleteDoctorService> _logger;
 
         public DeleteDoctorService(AppDbContext context, ILogger<DeleteDoctorService> logger)
         {

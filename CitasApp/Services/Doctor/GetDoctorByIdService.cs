@@ -1,6 +1,6 @@
 ﻿using CitasApp.Context;
 using CitasApp.Dto.Doctor;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CitasApp.Services.Doctor

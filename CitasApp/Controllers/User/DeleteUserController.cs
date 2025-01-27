@@ -1,4 +1,4 @@
-﻿using CitasApp.Services.Exceptions;
+﻿using CitasApp.Exceptions;
 using CitasApp.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,7 +15,7 @@ namespace CitasApp.Controllers.User
         public DeleteUserController(DeleteUserService deleteUser, ILogger<DeleteUserController> logger)
         {
             _deleteUser = deleteUser;
-            _logger = logger; 
+            _logger = logger;
         }
 
         [HttpDelete("{id}")]

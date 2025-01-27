@@ -1,5 +1,5 @@
-﻿using CitasApp.Services.Doctor;
-using CitasApp.Services.Exceptions;
+﻿using CitasApp.Exceptions;
+using CitasApp.Services.Doctor;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CitasApp.Controllers.Doctor
@@ -25,14 +25,14 @@ namespace CitasApp.Controllers.Doctor
                 var doctorResult = await _doctorService.GetDoctor(id);
                 return Ok(doctorResult);
             }
-            catch(ResourceNotFoundException ex)
+            catch (ResourceNotFoundException ex)
             {
                 _logger.LogWarning("No se encontro ningun doctor con el ID proporcionado.");
                 return NotFound(new { error = "No se encontro el doctor." });
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
-                return BadRequest(new {error = ex.Message});
+                return BadRequest(new { error = ex.Message });
             }
             catch (Exception ex)
             {

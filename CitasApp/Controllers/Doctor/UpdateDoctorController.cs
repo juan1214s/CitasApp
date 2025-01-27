@@ -2,7 +2,7 @@
 using CitasApp.Dto.Doctor;
 using CitasApp.Services.Doctor;
 using System.Threading.Tasks;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 
 namespace CitasApp.Controllers.Doctor
 {

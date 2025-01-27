@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "Vwl/i/6l7yebo0eSPKr5FWZCKuMTucuo080RmFICkfs=",
+  "Hash": "sSmgWyKZ9Y+8UnoATtrW0vYEUF7yQNJh0Wo+x8TLLnI=",
   "Source": "CitasApp",
   "BasePath": "_content/CitasApp",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

@@ -1,6 +1,6 @@
 ﻿using CitasApp.Services.AutoMapper;
 using CitasApp.Services.Doctor;
-using CitasApp.Services.Exceptions;
+using CitasApp.Services.Locations;
 using CitasApp.Services.User;
 
 namespace CitasApp.Services
@@ -24,6 +24,11 @@ namespace CitasApp.Services
             services.AddScoped<DeleteDoctorService>();
             services.AddScoped<UpdateDoctorService>();
             services.AddScoped<GetDoctorByIdService>();
+
+            //Ubicacion
+            services.AddScoped<CreateLocationService>();
+            services.AddScoped<DeleteLocationService>();
+            services.AddScoped<GetLocationsService>();
         }
     }
 }

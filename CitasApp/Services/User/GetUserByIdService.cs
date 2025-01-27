@@ -1,7 +1,7 @@
 ﻿using CitasApp.Context;
 using CitasApp.Dto.UserDto;
 using CitasApp.Entityes.Users;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 using Microsoft.Extensions.Logging;
 
 namespace CitasApp.Services.User

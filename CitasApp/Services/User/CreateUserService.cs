@@ -1,7 +1,7 @@
 ﻿using CitasApp.Context;
 using CitasApp.Dto.UserDto;
 using CitasApp.Entityes.Users;
-using CitasApp.Services.Exceptions;
+using CitasApp.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 public class CreateUserService
@@ -24,7 +24,7 @@ public class CreateUserService
             if (existingUser != null)
             {
                 // Lanza una excepción personalizada si el usuario ya existe
-                throw new UserAlreadyExistsException($"El usuario con ID {userDto.Id} ya está registrado.");
+                throw new ResourceAlreadyExistsException($"El usuario con ID {userDto.Id} ya está registrado.");
             }
 
             var user = new UsersEntity
@@ -43,10 +43,10 @@ public class CreateUserService
 
             return true;
         }
-        catch (DbUpdateException ex)
+        catch (AppExceptions ex)
         {
             _logger.LogError($"Error interno al crear el usuario: {ex.Message}");
-            throw new AppExceptions("Error al guardar cambios en la base de datos.", 500);
+            throw;
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using CitasApp.Services.Doctor;
-using CitasApp.Services.Exceptions;
+﻿using CitasApp.Exceptions;
+using CitasApp.Services.Doctor;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CitasApp.Controllers.Doctor
@@ -28,7 +28,7 @@ namespace CitasApp.Controllers.Doctor
             catch (ResourceNotFoundException ex)
             {
                 _logger.LogWarning($"No se encontró el doctor: {ex.Message}");
-                return NotFound(new { message = "El Doctor no fue encontrado. "});
+                return NotFound(new { message = "El Doctor no fue encontrado. " });
             }
             catch (ArgumentException ex)
             {
